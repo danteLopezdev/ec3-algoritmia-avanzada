@@ -1,0 +1,37 @@
+[
+  {
+    "id": 15,
+    "nombre": "Lucía",
+    "apellido": "Fernández",
+    "telefono": "987654321",
+    "correo": "lucia.fernandez@mail.com"
+  },
+  {
+    "id": 8,
+    "nombre": "Carlos",
+    "apellido": "Ramírez",
+    "telefono": "912345678",
+    "correo": "carlos.ramirez@mail.com"
+  },
+  {
+    "id": 22,
+    "nombre": "María",
+    "apellido": "Torres",
+    "telefono": "934567890",
+    "correo": "maria.torres@mail.com"
+  },
+  {
+    "id": 4,
+    "nombre": "José",
+    "apellido": "Quispe",
+    "telefono": "945678123",
+    "correo": "jose.quispe@mail.com"
+  },
+  {
+    "id": 12,
+    "nombre": "Andrea",
+    "apellido": "Salazar",
+    "telefono": "956781234",
+    "correo": "andrea.salazar@mail.com"
+  }
+]
