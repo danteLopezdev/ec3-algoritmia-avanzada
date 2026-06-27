@@ -1,0 +1,133 @@
+/* styles/index.css */
+/* Estilos mínimos y funcionales. El foco del EC3 es la lógica, no el diseño. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #222;
+}
+
+header {
+  background-color: #2b2d42;
+  color: #fff;
+  padding: 1.2rem 2rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header p {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+}
+
+section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#seccion-arboles {
+  grid-column: 1 / -1; /* ocupa todo el ancho, debajo del formulario y la tabla */
+}
+
+/* --- Formulario --- */
+#form-contacto label {
+  display: block;
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+#form-contacto input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+#form-botones {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+#form-botones button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+#btn-guardar {
+  background-color: #2b2d42;
+  color: #fff;
+}
+
+#btn-cancelar {
+  background-color: #e0e0e0;
+  color: #222;
+}
+
+/* --- Tabla --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.6rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+.btn-editar, .btn-eliminar {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-right: 0.3rem;
+}
+
+.btn-editar {
+  background-color: #4361ee;
+  color: #fff;
+}
+
+.btn-eliminar {
+  background-color: #e63946;
+  color: #fff;
+}
+
+/* --- Responsive: en pantallas chicas, una sola columna --- */
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}

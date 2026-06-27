@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda de Contactos - EC3 Algoritmia</title>
+  <link rel="stylesheet" href="styles/index.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Agenda de Contactos</h1>
+    <p>Sistema con visualización de árboles BST, AVL y Red-Black</p>
+  </header>
+
+  <main>
+
+    <!-- ===================== FORMULARIO CRUD ===================== -->
+    <section id="seccion-formulario">
+      <h2 id="titulo-formulario">Nuevo contacto</h2>
+
+      <form id="form-contacto">
+        <!-- Campo oculto: solo tiene valor cuando estamos EDITANDO -->
+        <input type="hidden" id="contacto-id" />
+
+        <label for="input-nombre">Nombre</label>
+        <input type="text" id="input-nombre" required />
+
+        <label for="input-apellido">Apellido</label>
+        <input type="text" id="input-apellido" required />
+
+        <label for="input-telefono">Teléfono</label>
+        <input type="tel" id="input-telefono" required />
+
+        <label for="input-correo">Correo</label>
+        <input type="email" id="input-correo" required />
+
+        <div id="form-botones">
+          <button type="submit" id="btn-guardar">Guardar</button>
+          <button type="button" id="btn-cancelar" hidden>Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===================== LISTA DE CONTACTOS ===================== -->
+    <section id="seccion-lista">
+      <h2>Contactos</h2>
+      <table id="tabla-contactos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla">
+          <!-- Las filas se generan dinámicamente desde ui.js -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===================== ÁRBOLES (próximo paso) ===================== -->
+    <section id="seccion-arboles">
+      <h2>Visualización de árboles</h2>
+      <p><em>Próximamente: BST, AVL y Red-Black</em></p>
+    </section>
+
+  </main>
+
+  <!-- Punto de entrada de la app. type="module" habilita los import/export -->
+  <script type="module" src="scripts/logic/app.js"></script>
+</body>
+</html>
