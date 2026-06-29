@@ -62,10 +62,28 @@
       </table>
     </section>
 
-    <!-- ===================== ÁRBOLES (próximo paso) ===================== -->
+    <!-- ===================== ÁRBOLES ===================== -->
     <section id="seccion-arboles">
       <h2>Visualización de árboles</h2>
-      <p><em>Próximamente: BST, AVL y Red-Black</em></p>
+
+      <div id="tabs-arboles">
+        <button class="tab-btn activo" data-arbol="bst">BST</button>
+        <button class="tab-btn" data-arbol="avl">AVL</button>
+        <button class="tab-btn" data-arbol="rb">Red-Black</button>
+      </div>
+
+      <div class="contenedor-arbol" id="vista-bst">
+        <canvas id="canvas-bst" width="900" height="400"></canvas>
+      </div>
+
+      <div class="contenedor-arbol oculto" id="vista-avl">
+        <canvas id="canvas-avl" width="900" height="400"></canvas>
+      </div>
+
+      <div class="contenedor-arbol oculto" id="vista-rb">
+        <canvas id="canvas-rb" width="900" height="400"></canvas>
+      </div>
+
     </section>
 
   </main>

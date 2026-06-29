@@ -1,37 +1,86 @@
 [
   {
-    "id": 15,
+    "id": 50,
     "nombre": "Lucía",
     "apellido": "Fernández",
     "telefono": "987654321",
     "correo": "lucia.fernandez@mail.com"
   },
   {
-    "id": 8,
+    "id": 25,
     "nombre": "Carlos",
     "apellido": "Ramírez",
     "telefono": "912345678",
     "correo": "carlos.ramirez@mail.com"
   },
   {
-    "id": 22,
+    "id": 75,
     "nombre": "María",
     "apellido": "Torres",
     "telefono": "934567890",
     "correo": "maria.torres@mail.com"
   },
   {
-    "id": 4,
+    "id": 10,
     "nombre": "José",
     "apellido": "Quispe",
     "telefono": "945678123",
     "correo": "jose.quispe@mail.com"
   },
   {
-    "id": 12,
+    "id": 35,
     "nombre": "Andrea",
     "apellido": "Salazar",
     "telefono": "956781234",
     "correo": "andrea.salazar@mail.com"
+  },
+  {
+    "id": 60,
+    "nombre": "Diego",
+    "apellido": "Vega",
+    "telefono": "923456789",
+    "correo": "diego.vega@mail.com"
+  },
+  {
+    "id": 90,
+    "nombre": "Valeria",
+    "apellido": "Castillo",
+    "telefono": "934561234",
+    "correo": "valeria.castillo@mail.com"
+  },
+  {
+    "id": 5,
+    "nombre": "Rodrigo",
+    "apellido": "Mendoza",
+    "telefono": "945672345",
+    "correo": "rodrigo.mendoza@mail.com"
+  },
+  {
+    "id": 18,
+    "nombre": "Camila",
+    "apellido": "Paredes",
+    "telefono": "956783456",
+    "correo": "camila.paredes@mail.com"
+  },
+  {
+    "id": 40,
+    "nombre": "Sebastián",
+    "apellido": "Huanca",
+    "telefono": "967894567",
+    "correo": "sebastian.huanca@mail.com"
+  },
+  {
+    "id": 70,
+    "nombre": "Daniela",
+    "apellido": "Flores",
+    "telefono": "978905678",
+    "correo": "daniela.flores@mail.com"
+  },
+  {
+    "id": 85,
+    "nombre": "Mateo",
+    "apellido": "Ríos",
+    "telefono": "989016789",
+    "correo": "mateo.rios@mail.com"
   }
 ]

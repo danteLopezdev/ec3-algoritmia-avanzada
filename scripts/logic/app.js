@@ -6,6 +6,32 @@ import {
   eliminarContacto,
 } from "./contactos.js";
 
+import { ArbolBST } from "../arboles/bst.js";
+import { ArbolAVL } from "../arboles/avl.js";
+import { ArbolRB } from "../arboles/redblack.js";
+import { dibujarArbol } from "../arboles/dibujarArbol.js";
+
+
+const arbolBST = new ArbolBST();
+const arbolAVL = new ArbolAVL();
+const arbolRB = new ArbolRB();
+const canvasBST = document.getElementById("canvas-bst");
+const canvasAVL = document.getElementById("canvas-avl");
+const canvasRB = document.getElementById("canvas-rb");
+
+function reconstruirArboles() {
+  const contactos = obtenerContactos();
+
+  arbolBST.construirDesde(contactos);
+  dibujarArbol(canvasBST, arbolBST.raiz);
+
+  arbolAVL.construirDesde(contactos);
+  dibujarArbol(canvasAVL, arbolAVL.raiz);
+
+  arbolRB.construirDesde(contactos);
+  dibujarArbol(canvasRB, arbolRB.raiz);
+}
+
 
 const form = document.getElementById("form-contacto");
 const inputId = document.getElementById("contacto-id");
@@ -17,15 +43,34 @@ const tituloFormulario = document.getElementById("titulo-formulario");
 const btnCancelar = document.getElementById("btn-cancelar");
 const cuerpoTabla = document.getElementById("cuerpo-tabla");
 
-// --- Arranque de la app ---
+const tabBtns = document.querySelectorAll(".tab-btn");
+const vistas = {
+  bst: document.getElementById("vista-bst"),
+  avl: document.getElementById("vista-avl"),
+  rb: document.getElementById("vista-rb"),
+};
+
+tabBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    tabBtns.forEach((b) => b.classList.remove("activo"));
+    Object.values(vistas).forEach((v) => v.classList.add("oculto"));
+
+    btn.classList.add("activo");
+    vistas[btn.dataset.arbol].classList.remove("oculto");
+  });
+});
+
+
 async function iniciar() {
   await inicializarContactos();
   renderizarTabla();
+  reconstruirArboles();
 }
+
 
 function renderizarTabla() {
   const contactos = obtenerContactos();
-  cuerpoTabla.innerHTML = ""; // limpiar antes de redibujar
+  cuerpoTabla.innerHTML = ""; 
 
   contactos.forEach((contacto) => {
     const fila = document.createElement("tr");
@@ -46,14 +91,12 @@ function renderizarTabla() {
   });
 }
 
-
 function limpiarFormulario() {
   form.reset();
   inputId.value = "";
   tituloFormulario.textContent = "Nuevo contacto";
   btnCancelar.hidden = true;
 }
-
 
 function cargarContactoEnFormulario(contacto) {
   inputId.value = contacto.id;
@@ -86,16 +129,18 @@ form.addEventListener("submit", (evento) => {
 
   limpiarFormulario();
   renderizarTabla();
+  reconstruirArboles();
 });
+
 
 btnCancelar.addEventListener("click", () => {
   limpiarFormulario();
 });
 
+
 cuerpoTabla.addEventListener("click", (evento) => {
   const id = Number(evento.target.dataset.id);
   if (!id) return; 
-
   if (evento.target.classList.contains("btn-editar")) {
     const contactos = obtenerContactos();
     const contacto = contactos.find((c) => c.id === id);
@@ -107,6 +152,7 @@ cuerpoTabla.addEventListener("click", (evento) => {
     if (confirmar) {
       eliminarContacto(id);
       renderizarTabla();
+      reconstruirArboles();
     }
   }
 });
