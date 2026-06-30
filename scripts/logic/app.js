@@ -10,6 +10,7 @@ import { ArbolBST } from "../arboles/bst.js";
 import { ArbolAVL } from "../arboles/avl.js";
 import { ArbolRB } from "../arboles/redblack.js";
 import { dibujarArbol } from "../arboles/dibujarArbol.js";
+import { bfs, dfs, cancelarAnimacion } from "./recorridos.js";
 
 
 const arbolBST = new ArbolBST();
@@ -32,7 +33,6 @@ function reconstruirArboles() {
   dibujarArbol(canvasRB, arbolRB.raiz);
 }
 
-
 const form = document.getElementById("form-contacto");
 const inputId = document.getElementById("contacto-id");
 const inputNombre = document.getElementById("input-nombre");
@@ -43,6 +43,7 @@ const tituloFormulario = document.getElementById("titulo-formulario");
 const btnCancelar = document.getElementById("btn-cancelar");
 const cuerpoTabla = document.getElementById("cuerpo-tabla");
 
+// --- Tabs de árboles ---
 const tabBtns = document.querySelectorAll(".tab-btn");
 const vistas = {
   bst: document.getElementById("vista-bst"),
@@ -50,16 +51,47 @@ const vistas = {
   rb: document.getElementById("vista-rb"),
 };
 
+let arbolActivo = "bst";
+
 tabBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
+    cancelarAnimacion(); // si había animación en curso, la detenemos
+    reconstruirArboles(); // redibujar sin resaltados al cambiar de árbol
+
     tabBtns.forEach((b) => b.classList.remove("activo"));
     Object.values(vistas).forEach((v) => v.classList.add("oculto"));
 
     btn.classList.add("activo");
     vistas[btn.dataset.arbol].classList.remove("oculto");
+    arbolActivo = btn.dataset.arbol;
   });
 });
 
+const btnBFS = document.getElementById("btn-bfs");
+const btnDFS = document.getElementById("btn-dfs");
+
+function obtenerArbolYCanvasActivo() {
+  if (arbolActivo === "bst") return { arbol: arbolBST, canvas: canvasBST };
+  if (arbolActivo === "avl") return { arbol: arbolAVL, canvas: canvasAVL };
+  return { arbol: arbolRB, canvas: canvasRB };
+}
+
+function bloquearBotones(bloquear) {
+  btnBFS.disabled = bloquear;
+  btnDFS.disabled = bloquear;
+}
+
+btnBFS.addEventListener("click", async () => {
+  const { arbol, canvas } = obtenerArbolYCanvasActivo();
+  bloquearBotones(true);
+  await bfs(canvas, arbol.raiz, () => bloquearBotones(false));
+});
+
+btnDFS.addEventListener("click", async () => {
+  const { arbol, canvas } = obtenerArbolYCanvasActivo();
+  bloquearBotones(true);
+  await dfs(canvas, arbol.raiz, () => bloquearBotones(false));
+});
 
 async function iniciar() {
   await inicializarContactos();
@@ -67,11 +99,9 @@ async function iniciar() {
   reconstruirArboles();
 }
 
-
 function renderizarTabla() {
   const contactos = obtenerContactos();
   cuerpoTabla.innerHTML = ""; 
-
   contactos.forEach((contacto) => {
     const fila = document.createElement("tr");
 
@@ -137,10 +167,10 @@ btnCancelar.addEventListener("click", () => {
   limpiarFormulario();
 });
 
-
 cuerpoTabla.addEventListener("click", (evento) => {
   const id = Number(evento.target.dataset.id);
   if (!id) return; 
+
   if (evento.target.classList.contains("btn-editar")) {
     const contactos = obtenerContactos();
     const contacto = contactos.find((c) => c.id === id);

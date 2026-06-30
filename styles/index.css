@@ -42,7 +42,7 @@ section {
 }
 
 #seccion-arboles {
-  grid-column: 1 / -1; /* ocupa todo el ancho, debajo del formulario y la tabla */
+  grid-column: 1 / -1; 
 }
 
 .contenedor-arbol {
@@ -82,7 +82,34 @@ section {
   color: #fff;
 }
 
-#canvas-bst {
+#controles-recorrido {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#controles-recorrido button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #4361ee;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#controles-recorrido button:hover {
+  background-color: #3451d1;
+}
+
+#controles-recorrido button:disabled {
+  background-color: #a8b0d8;
+  cursor: not-allowed;
+}
+
+canvas {
   background-color: #fafafa;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -166,7 +193,6 @@ th {
   color: #fff;
 }
 
-/* --- Responsive: en pantallas chicas, una sola columna --- */
 @media (max-width: 768px) {
   main {
     grid-template-columns: 1fr;

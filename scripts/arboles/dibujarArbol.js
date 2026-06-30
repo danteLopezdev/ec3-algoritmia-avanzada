@@ -5,7 +5,8 @@ const MARGEN_SUPERIOR = 40;
 
 function calcularPosiciones(raiz) {
   const posiciones = new Map();
-  let contadorInOrder = 0; 
+  let contadorInOrder = 0; // se incrementa en cada nodo visitado, de izquierda a derecha
+
   function recorrer(nodo, profundidad) {
     if (nodo === null) return;
 
@@ -27,9 +28,10 @@ function calcularPosiciones(raiz) {
  * Dibuja el árbol completo en el canvas indicado.
  * @param {HTMLCanvasElement} canvas
  * @param {NodoBST|null} raiz
- * @param {Set} idsResaltados 
+ * @param {Set} idsResaltados - nodo actual de la animación (amarillo)
+ * @param {Set} idsVisitados  - nodos ya recorridos (color tenue)
  */
-export function dibujarArbol(canvas, raiz, idsResaltados = new Set()) {
+export function dibujarArbol(canvas, raiz, idsResaltados = new Set(), idsVisitados = new Set()) {
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -42,6 +44,7 @@ export function dibujarArbol(canvas, raiz, idsResaltados = new Set()) {
 
   const posiciones = calcularPosiciones(raiz);
 
+  // Ajustar el ancho del canvas según cuántos nodos hay, para que no se amontonen
   const cantidadNodos = posiciones.size;
   const anchoNecesario = MARGEN_SUPERIOR * 2 + cantidadNodos * ESPACIO_HORIZONTAL;
   if (anchoNecesario > canvas.width) {
@@ -51,7 +54,7 @@ export function dibujarArbol(canvas, raiz, idsResaltados = new Set()) {
   dibujarConexiones(ctx, raiz, posiciones);
 
   posiciones.forEach((posicion, nodo) => {
-    dibujarNodo(ctx, nodo, posicion, idsResaltados.has(nodo.id));
+    dibujarNodo(ctx, nodo, posicion, idsResaltados.has(nodo.id), idsVisitados.has(nodo.id));
   });
 }
 
@@ -81,22 +84,27 @@ function dibujarLinea(ctx, desde, hasta) {
   ctx.stroke();
 }
 
-function dibujarNodo(ctx, nodo, posicion, resaltado) {
+function dibujarNodo(ctx, nodo, posicion, resaltado, visitado) {
   const { x, y } = posicion;
-  let colorRelleno = "#9133e9";
+
+  let colorRelleno = "#4361ee";
   if (nodo.color === "ROJO") colorRelleno = "#e63946";
   if (nodo.color === "NEGRO") colorRelleno = "#2b2d42";
-  if (resaltado) colorRelleno = "#ffd166";
+  if (visitado) colorRelleno = "#a8b0d8";   // azul tenue: ya fue visitado
+  if (resaltado) colorRelleno = "#ffd166";  // amarillo: nodo actual
 
+  // Círculo del nodo
   ctx.beginPath();
   ctx.arc(x, y, RADIO_NODO, 0, Math.PI * 2);
   ctx.fillStyle = colorRelleno;
   ctx.fill();
-  ctx.strokeStyle = "#2b2d42";
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = resaltado ? "#f4a261" : "#2b2d42";
+  ctx.lineWidth = resaltado ? 3 : 2;
   ctx.stroke();
+
+  // Texto del id, centrado
   ctx.fillStyle = resaltado ? "#2b2d42" : "#fff";
-  ctx.font = "bold 14px system-ui";
+  ctx.font = resaltado ? "bold 15px system-ui" : "bold 14px system-ui";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(nodo.id, x, y);
