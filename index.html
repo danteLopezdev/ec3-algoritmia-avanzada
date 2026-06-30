@@ -9,34 +9,37 @@
 <body>
 
   <header>
-    <h1>Agenda de Contactos</h1>
-    <p>Sistema con visualización de árboles BST, AVL y Red-Black</p>
+    <div class="header-icon">🌐</div>
+    <div class="header-text">
+      <h1>Agenda de Contactos</h1>
+      <p>Visualización de árboles BST · AVL · Red-Black</p>
+    </div>
   </header>
 
   <main>
 
     <!-- ===================== FORMULARIO CRUD ===================== -->
     <section id="seccion-formulario">
-      <h2 id="titulo-formulario">Nuevo contacto</h2>
+      <h2>Contacto</h2>
+      <p id="titulo-formulario">Nuevo contacto</p>
 
       <form id="form-contacto">
-        <!-- Campo oculto: solo tiene valor cuando estamos EDITANDO -->
         <input type="hidden" id="contacto-id" />
 
         <label for="input-nombre">Nombre</label>
-        <input type="text" id="input-nombre" required />
+        <input type="text" id="input-nombre" placeholder="Ej. Lucía" required />
 
         <label for="input-apellido">Apellido</label>
-        <input type="text" id="input-apellido" required />
+        <input type="text" id="input-apellido" placeholder="Ej. Fernández" required />
 
         <label for="input-telefono">Teléfono</label>
-        <input type="tel" id="input-telefono" required />
+        <input type="tel" id="input-telefono" placeholder="Ej. 987654321" required />
 
         <label for="input-correo">Correo</label>
-        <input type="email" id="input-correo" required />
+        <input type="email" id="input-correo" placeholder="Ej. lucia@mail.com" required />
 
         <div id="form-botones">
-          <button type="submit" id="btn-guardar">Guardar</button>
+          <button type="submit" id="btn-guardar">Guardar contacto</button>
           <button type="button" id="btn-cancelar" hidden>Cancelar</button>
         </div>
       </form>
@@ -45,36 +48,40 @@
     <!-- ===================== LISTA DE CONTACTOS ===================== -->
     <section id="seccion-lista">
       <h2>Contactos</h2>
-      <table id="tabla-contactos">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="cuerpo-tabla">
-          <!-- Las filas se generan dinámicamente desde ui.js -->
-        </tbody>
-      </table>
+      <div class="tabla-wrapper">
+        <table id="tabla-contactos">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Teléfono</th>
+              <th>Correo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpo-tabla"></tbody>
+        </table>
+      </div>
     </section>
 
     <!-- ===================== ÁRBOLES ===================== -->
     <section id="seccion-arboles">
       <h2>Visualización de árboles</h2>
 
-      <div id="tabs-arboles">
-        <button class="tab-btn activo" data-arbol="bst">BST</button>
-        <button class="tab-btn" data-arbol="avl">AVL</button>
-        <button class="tab-btn" data-arbol="rb">Red-Black</button>
-      </div>
+      <div class="arboles-controles">
+        <div id="tabs-arboles">
+          <button class="tab-btn activo" data-arbol="bst">BST</button>
+          <button class="tab-btn" data-arbol="avl">AVL</button>
+          <button class="tab-btn" data-arbol="rb">Red-Black</button>
+        </div>
 
-      <div id="controles-recorrido">
-        <button id="btn-bfs">▶ BFS (por niveles)</button>
-        <button id="btn-dfs">▶ DFS (in-order)</button>
+        <div class="sep"></div>
+
+        <div id="controles-recorrido">
+          <button id="btn-bfs">⬛ BFS — por niveles</button>
+          <button id="btn-dfs">↙ DFS — in-order</button>
+        </div>
       </div>
 
       <div class="contenedor-arbol" id="vista-bst">
@@ -93,7 +100,17 @@
 
   </main>
 
-  <!-- Punto de entrada de la app. type="module" habilita los import/export -->
+  <footer>
+    <p class="footer-nombre">Dante Lopez Flores</p>
+    <p class="footer-curso">EC3 · Algoritmia y Estructura de Datos Avanzada · UCSUR</p>
+    <div class="footer-techs">
+      <span class="tech-tag">HTML5</span>
+      <span class="tech-tag">CSS3</span>
+      <span class="tech-tag">JavaScript ES6+</span>
+      <span class="tech-tag">Json</span>
+    </div>
+  </footer>
+
   <script type="module" src="scripts/logic/app.js"></script>
 </body>
 </html>

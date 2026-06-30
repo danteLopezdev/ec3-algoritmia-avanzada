@@ -1,11 +1,12 @@
 const RADIO_NODO = 22;
 const ESPACIO_VERTICAL = 80; 
-const ESPACIO_HORIZONTAL = 60; 
+const ESPACIO_HORIZONTAL = 60;
 const MARGEN_SUPERIOR = 40;
+
 
 function calcularPosiciones(raiz) {
   const posiciones = new Map();
-  let contadorInOrder = 0; // se incrementa en cada nodo visitado, de izquierda a derecha
+  let contadorInOrder = 0;
 
   function recorrer(nodo, profundidad) {
     if (nodo === null) return;
@@ -43,8 +44,6 @@ export function dibujarArbol(canvas, raiz, idsResaltados = new Set(), idsVisitad
   }
 
   const posiciones = calcularPosiciones(raiz);
-
-  // Ajustar el ancho del canvas según cuántos nodos hay, para que no se amontonen
   const cantidadNodos = posiciones.size;
   const anchoNecesario = MARGEN_SUPERIOR * 2 + cantidadNodos * ESPACIO_HORIZONTAL;
   if (anchoNecesario > canvas.width) {
@@ -52,7 +51,6 @@ export function dibujarArbol(canvas, raiz, idsResaltados = new Set(), idsVisitad
   }
 
   dibujarConexiones(ctx, raiz, posiciones);
-
   posiciones.forEach((posicion, nodo) => {
     dibujarNodo(ctx, nodo, posicion, idsResaltados.has(nodo.id), idsVisitados.has(nodo.id));
   });
@@ -87,11 +85,12 @@ function dibujarLinea(ctx, desde, hasta) {
 function dibujarNodo(ctx, nodo, posicion, resaltado, visitado) {
   const { x, y } = posicion;
 
+
   let colorRelleno = "#4361ee";
   if (nodo.color === "ROJO") colorRelleno = "#e63946";
   if (nodo.color === "NEGRO") colorRelleno = "#2b2d42";
-  if (visitado) colorRelleno = "#a8b0d8";   // azul tenue: ya fue visitado
-  if (resaltado) colorRelleno = "#ffd166";  // amarillo: nodo actual
+  if (visitado) colorRelleno = "#a8b0d8";   
+  if (resaltado) colorRelleno = "#ffd166";  
 
   // Círculo del nodo
   ctx.beginPath();
